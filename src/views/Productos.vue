@@ -3,7 +3,6 @@
 <!-- Section-->
         <section class="py-5">
             <div class="container px-4 px-lg-5 mt-5">
-              <input type="submit" v-on:click="citas" class="fadeIn fourth" value= "Ver Citas">
                 <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
                     
 
@@ -16,9 +15,15 @@
                                     <h5 class="fw-bolder">Crear</h5>
                                     <!-- Product reviews-->
                                     <div class="d-flex justify-content-center small text-warning mb-2">
-                                    <input type="text"  id="CajaServNam" class="" name="CajaServNam" placeholder="Servicio">
-                                       
+                                    <input type="text"  id="CajaProNam" class="" name="CajaProNam" placeholder="Producto">
                                     </div>
+                                    <div class="d-flex justify-content-center small text-warning mb-2">
+                                    <input type="text"  id="CajaProPre" class="" name="CajaProPre" placeholder="Precio">
+                                    </div>
+                                    <div class="d-flex justify-content-center small text-warning mb-2">
+                                    <input type="text"  id="CajaProCan" class="" name="CajaProCan" placeholder="Cantidad">
+                                    </div>
+
 
                                 </div>
                             </div>
@@ -39,9 +44,14 @@
                                     <!-- Product name-->
                                     <h5 class="fw-bolder">Editar</h5>
                                     <!-- Product reviews-->
+                                   <div class="d-flex justify-content-center small text-warning mb-2">
+                                    <input type="text"  id="CajaNam" class="" name="CajaNam" placeholder="Producto">
+                                    </div>
                                     <div class="d-flex justify-content-center small text-warning mb-2">
-                                    <input type="text"  id="CajaServ" class="" name="CajaServ" placeholder="Servicio">
-                                       
+                                    <input type="text"  id="CajaPre" class="" name="CajaPre" placeholder="Precio">
+                                    </div>
+                                    <div class="d-flex justify-content-center small text-warning mb-2">
+                                    <input type="text"  id="CajaCan" class="" name="CajaCan" placeholder="Cantidad">
                                     </div>
                                     
                                 </div>
@@ -56,17 +66,19 @@
                     <ul>
                      
                       <li
-                        v-for="(Servicio, index) in getListaServicios"
-                        :key="Servicio._id"
+                        v-for="(Producto, index) in getListaProductos"
+                        :key="Producto._id"
                         >
-                        <servComponent
-                        :name ="Servicio.name"
+                        <proComponent
+                        :Nombre ="Producto.Nombre"
+                        :Cantidad ="Producto.Cantidad"
+                        :Precio ="Producto.Precio"
                         :index="index"
-                        :id="Servicio._id.toString()"
+                        :id="Producto._id.toString()"
 
                         @Delete="deleteTask"
                         @Change="changeStatus"
-                        ></servComponent>
+                        ></proComponent>
                       </li>
                     </ul>
 
@@ -90,12 +102,12 @@ import {mapGetters} from "vuex";
 
 // Components
 //import createTaskInput from '../components/createTaskInput';
-import servComponent from '../components/servComponent.vue';
+import proComponent from '../components/proComponent.vue';
 
 
 
 export default {
-name: "Servicios",
+name: "Productos",
   data() {
     return {
       actualId: "",
@@ -104,23 +116,23 @@ name: "Servicios",
     }
   }, 
   computed:{
-      ...mapGetters('Servicios',
+      ...mapGetters('Productos',
         [
-            "getListaServicios",
+            "getListaProductos",
         ]
       )
     },
   methods: {
-     async getAllServ(){
+     async getAllPro(){
        
-        const ServList = this.$store.getters["Servicios/getListaServicios"];
+        const ProList = this.$store.getters["Productos/getListaProductos"];
 
 
-        if (ServList && ServList.length === 0 ) {
-          console.log("getAllServ")
-          await this.$store.dispatch("Servicios/getAllServ");
+        if (ProList && ProList.length === 0 ) {
+          console.log("getAllPro")
+          await this.$store.dispatch("Productos/getAllPro");
         }
-        console.log(ServList)
+        console.log(ProList)
        
 
       },
@@ -128,12 +140,14 @@ name: "Servicios",
         console.log(index)
         this.actualId = id
         this.actualIndex = index
-        await this.$store.dispatch("Servicios/deleteServ", {Id: this.actualId,  Index: this.actualIndex} );
+        await this.$store.dispatch("Productos/deletePro", {Id: this.actualId,  Index: this.actualIndex} );
        
       },
-       changeStatus(name, id,index){
-        document.getElementById("CajaServ").value = name ;
-        //console.log(id)
+       changeStatus(Nombre, Precio, Cantidad, id, index){
+        document.getElementById("CajaNam").value = Nombre;
+        document.getElementById("CajaPre").value = Precio;
+        document.getElementById("CajaCan").value = Cantidad;
+        console.log(id)
         this.actualId = id
         this.actualIndex = index
         //console.log(index)
@@ -143,15 +157,19 @@ name: "Servicios",
         
       },
       async actualizar(){
-        if(this.actualId !== ""){
 
-          const name = document.getElementById("CajaServ").value;
-          await this.$store.dispatch("Servicios/ChangeServ", {Id: this.actualId,  Index: this.actualIndex, Name: name})
+        if(this.actualId !== ""){
+          
+          const Nombre = document.getElementById("CajaNam").value;
+          const Precio = document.getElementById("CajaPre").value;
+          const Cantidad = document.getElementById("CajaCan").value;
+
+          await this.$store.dispatch("Productos/ChangePro", {Id: this.actualId,  Index: this.actualIndex, Nombre: Nombre, Precio: Precio, Cantidad: Cantidad})
           this.actualId = ""
           this.actualIndex = ""
 
         }else{
-          window.alert("No se ha indicado servicio a modificar");
+          window.alert("No se ha indicado Producto a modificar");
 
 
         }
@@ -160,26 +178,32 @@ name: "Servicios",
     
       },
       async crear(){
-        const name = document.getElementById("CajaServNam").value;
-        if(name !== ""){
+        const Nombre = document.getElementById("CajaProNam").value;
+        const Precio = document.getElementById("CajaProPre").value;
+        const Cantidad = document.getElementById("CajaProCan").value;
+
+       const Pro = {
+          Nombre: Nombre,
+          Precio: Precio,
+          Cantidad: Cantidad
+        }
+
+        if(Pro){
           
-          await this.$store.dispatch("Servicios/addServ",  name )
+          await this.$store.dispatch("Productos/addPro", Pro )
 
         }else{
-           window.alert("No se posible crear servicios en blanco");
+           window.alert("No se posible crear Productos en blanco");
         }
        
     
-      },
-      citas(){
-          this.$router.push({path: "/CITA"});
       }
   },
   created() {
-    this.getAllServ()
+    this.getAllPro()
   },
   components: {
-    servComponent
+    proComponent
   }
 }
 

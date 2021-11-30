@@ -3,13 +3,17 @@ import axios from "axios";
 	const state = {
 		User: String,
         Token : String,
-        Admin: Boolean
+        Admin: Boolean,
+		Personal: []
+
+
 	};
 	const getters = {
 
 		getUser: (state) => state.User,
         gettoken: (state) => state.Token,
-        getAdmin: (state) => state.Admin
+        getAdmin: (state) => state.Admin,
+		getListaPersonal: (state) => state.Personal
 		
 	};
 	const actions = {
@@ -41,11 +45,29 @@ import axios from "axios";
 			}catch (err) {
 				console.log(err);
 			}
+		},
+
+		async getAllUsers({commit}){
+			try {
+				
+				const response = await axios.get(
+					`http://localhost:3000/Usuario/mostrar`
+				);
+			
+
+				console.log(response.data)
+				
+
+				if (response.data){
+					
+					commit('SET_USERS', response.data);
+					
+				}
+
+			}catch (err) {
+				console.log(err);
+			}
 		}
-
-
-		
-
 	};
 
 	const mutations = {
@@ -62,6 +84,10 @@ import axios from "axios";
 			console.log( state.Admin)
             console.log(state.User)
 			
+		},
+		SET_USERS(state, Users) {
+			state.Personal = Users
+
 		},
 
 	};

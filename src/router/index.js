@@ -17,28 +17,16 @@ const routes = [
     component: () => import('../views/Citas.vue')
   },
   {
-    path: '/Servicios',
-    name: 'Servicios',
+    path: '/Productos',
+    name: 'Productos',
 
-    component: () => import('../views/Servicios.vue')
+    component: () => import('../views/Productos.vue')
   },
   {
     path: '/Agendar',
     name: 'Agendar',
 
     component: () => import('../views/CitaAgendar.vue')
-  },
-  {
-    path: '/VerServicios',
-    name: 'Servicios_Cli',
-
-    component: () => import('../views/ServiciosCli.vue')
-  },
-  {
-    path: '/Citas_Ad',
-    name: 'Citas_Ad',
-
-    //component: () => import('../views/Citas_Ad.vue')
   }
 ]
 
