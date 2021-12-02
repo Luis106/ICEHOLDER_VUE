@@ -23,10 +23,22 @@ const routes = [
     component: () => import('../views/Productos.vue')
   },
   {
-    path: '/Agendar',
-    name: 'Agendar',
+    path: '/ProductosPapelera',
+    name: 'ProductosPapelera',
 
-    component: () => import('../views/CitaAgendar.vue')
+    component: () => import('../views/ProductosPa.vue')
+  },
+  {
+    path: '/CAJA',
+    name: 'CAJA',
+
+    component: () => import('../views/Caja.vue')
+  },
+  {
+    path: '/TERMINAR',
+    name: 'TERMINAR',
+
+    component: () => import('../views/Terminar.vue')
   }
 ]
 

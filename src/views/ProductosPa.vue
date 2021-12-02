@@ -3,7 +3,7 @@
 <!-- Section-->
         <section class="py-5">
             <div class="container px-4 px-lg-5 mt-5">
-                     <input type="submit" v-on:click="Ir"  class="fadeIn fourth" value= "Eliminados">
+                <input type="submit" v-on:click="Ir"  class="fadeIn fourth" value= "Productos">
                 <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
                     
 
@@ -67,10 +67,10 @@
                     <ul>
                      
                       <li
-                        v-for="(Producto, index) in getListaProductos"
+                        v-for="(Producto, index) in getListaProductosP"
                         :key="Producto._id"
                         >
-                        <proComponent
+                        <proComponentP
                         :Nombre ="Producto.Nombre"
                         :Cantidad ="Producto.Cantidad"
                         :Precio ="Producto.Precio"
@@ -79,7 +79,7 @@
 
                         @Delete="deleteTask"
                         @Change="changeStatus"
-                        ></proComponent>
+                        ></proComponentP>
                       </li>
                     </ul>
 
@@ -103,7 +103,7 @@ import {mapGetters} from "vuex";
 
 // Components
 //import createTaskInput from '../components/createTaskInput';
-import proComponent from '../components/proComponent.vue';
+import proComponentP from '../components/proComponentP.vue';
 
 
 
@@ -119,19 +119,19 @@ name: "Productos",
   computed:{
       ...mapGetters('Productos',
         [
-            "getListaProductos",
+            "getListaProductosP",
         ]
       )
     },
   methods: {
      async getAllPro(){
        
-        const ProList = this.$store.getters["Productos/getListaProductos"];
+        const ProList = this.$store.getters["Productos/getListaProductosP"];
 
 
         if (ProList && ProList.length === 0 ) {
-          console.log("getAllPro")
-          await this.$store.dispatch("Productos/getAllPro");
+          console.log("getAllProP")
+          await this.$store.dispatch("Productos/getAllProP");
         }
         console.log(ProList)
        
@@ -141,7 +141,7 @@ name: "Productos",
         console.log(index)
         this.actualId = id
         this.actualIndex = index
-        await this.$store.dispatch("Productos/deletePro", {Id: this.actualId,  Index: this.actualIndex} );
+        await this.$store.dispatch("Productos/restorePro", {Id: this.actualId,  Index: this.actualIndex} );
        
       },
        changeStatus(Nombre, Precio, Cantidad, id, index){
@@ -200,14 +200,14 @@ name: "Productos",
     
       },
       Ir(){
-          this.$router.push({path: "/ProductosPapelera"});
+          this.$router.push({path: "/Productos"});
       }
   },
   created() {
     this.getAllPro()
   },
   components: {
-    proComponent
+    proComponentP
   }
 }
 

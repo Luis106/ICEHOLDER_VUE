@@ -76,6 +76,7 @@
   }
 }
 
+
 body {
   margin: 0;
   font-family: var(--bs-body-font-family);
@@ -350,6 +351,7 @@ textarea {
   font-family: inherit;
   font-size: inherit;
   line-height: inherit;
+  width: -webkit-fill-available;
 }
 
 button,
@@ -595,7 +597,7 @@ progress {
   color: #6c757d;
 }
 .blockquote-footer::before {
-  content: "— ";
+  content: "— ";
 }
 
 .img-fluid {
