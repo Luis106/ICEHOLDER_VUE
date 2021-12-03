@@ -64,9 +64,9 @@
                         </div>
                     </div>
 
-                    <ul>
+                 
                      
-                      <li
+                      <div
                         v-for="(Producto, index) in getListaProductos"
                         :key="Producto._id"
                         >
@@ -80,8 +80,8 @@
                         @Delete="deleteTask"
                         @Change="changeStatus"
                         ></proComponent>
-                      </li>
-                    </ul>
+                      </div>
+                    
 
 
 

@@ -346,7 +346,8 @@ input,
 button,
 select,
 optgroup,
-textarea {
+textarea,
+password {
   margin: 0;
   font-family: inherit;
   font-size: inherit;

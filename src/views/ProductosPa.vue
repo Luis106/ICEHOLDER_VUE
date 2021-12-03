@@ -8,65 +8,15 @@
                     
 
                   <div class="col mb-5">
-                        <div class="card h-100">
-                
-                            <div class="card-body p-4">
-                                <div class="text-center">
-                                    <!-- Product name-->
-                                    <h5 class="fw-bolder">Crear</h5>
-                                    <!-- Product reviews-->
-                                    <div class="d-flex justify-content-center small text-warning mb-2">
-                                    <input type="text"  id="CajaProNam" class="" name="CajaProNam" placeholder="Producto">
-                                    </div>
-                                    <div class="d-flex justify-content-center small text-warning mb-2">
-                                    <input type="text"  id="CajaProPre" class="" name="CajaProPre" placeholder="Precio">
-                                    </div>
-                                    <div class="d-flex justify-content-center small text-warning mb-2">
-                                    <input type="text"  id="CajaProCan" class="" name="CajaProCan" placeholder="Cantidad">
-                                    </div>
-
-
-                                </div>
-                            </div>
-                            <!-- Product actions-->
-                            <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
-                                <button type="button"  class="text-center btn btn-outline-dark mt-auto" v-on:click="crear()" >Crear</button>
-                            </div>
-                        </div>
+                        
                     </div>
 
 
 
-                    <div class="col mb-5">
-                        <div class="card h-100">
-                
-                            <div class="card-body p-4">
-                                <div class="text-center">
-                                    <!-- Product name-->
-                                    <h5 class="fw-bolder">Editar</h5>
-                                    <!-- Product reviews-->
-                                   <div class="d-flex justify-content-center small text-warning mb-2">
-                                    <input type="text"  id="CajaNam" class="" name="CajaNam" placeholder="Producto">
-                                    </div>
-                                    <div class="d-flex justify-content-center small text-warning mb-2">
-                                    <input type="text"  id="CajaPre" class="" name="CajaPre" placeholder="Precio">
-                                    </div>
-                                    <div class="d-flex justify-content-center small text-warning mb-2">
-                                    <input type="text"  id="CajaCan" class="" name="CajaCan" placeholder="Cantidad">
-                                    </div>
-                                    
-                                </div>
-                            </div>
-                            <!-- Product actions-->
-                            <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
-                                <button type="button"  class="text-center btn btn-outline-dark mt-auto" v-on:click="actualizar()" >Modificar</button>
-                            </div>
-                        </div>
-                    </div>
 
-                    <ul>
+                 
                      
-                      <li
+                      <div
                         v-for="(Producto, index) in getListaProductosP"
                         :key="Producto._id"
                         >
@@ -80,8 +30,8 @@
                         @Delete="deleteTask"
                         @Change="changeStatus"
                         ></proComponentP>
-                      </li>
-                    </ul>
+                      </div>
+                    
 
 
 

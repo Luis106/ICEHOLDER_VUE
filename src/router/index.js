@@ -11,10 +11,16 @@ const routes = [
     component: LOGIN
   },
   {
-    path: '/CITA',
-    name: 'CITA',
+    path: '/Personal',
+    name: 'Personal',
 
-    component: () => import('../views/Citas.vue')
+    component: () => import('../views/Usuarios.vue')
+  },
+  {
+    path: '/PersonalPapelera',
+    name: 'PersonalPapelera',
+
+    component: () => import('../views/UsuariosPa.vue')
   },
   {
     path: '/Productos',
@@ -39,6 +45,18 @@ const routes = [
     name: 'TERMINAR',
 
     component: () => import('../views/Terminar.vue')
+  },
+  {
+    path: '/MENU',
+    name: 'MENU',
+
+    component: () => import('../views/Menu.vue')
+  },
+  {
+    path: '/CORTE',
+    name: 'CORTE',
+
+    component: () => import('../views/Corte.vue')
   }
 ]
 

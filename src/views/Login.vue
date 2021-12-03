@@ -63,11 +63,11 @@
           
           if(Admin){
             
-              this.$router.push({path: "/Servicios"});
+              this.$router.push({path: "/MENU"});
 
           }else{
            
-              this.$router.push({path: "/VerServicios"});
+              this.$router.push({path: "/MENU"});
               
           }
         

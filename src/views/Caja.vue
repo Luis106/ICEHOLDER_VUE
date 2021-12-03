@@ -89,9 +89,10 @@ name: "Productos",
 
       },
         Agregar(Producto, Precio, Cantidad){
-           const user = "Luna"
+           //const user = "Luna"
+        const user = this.$store.getters["User/getUser"];
         console.log(Producto,Precio,Cantidad , user)
-        //const user = vueInstance.$store.getters["User/getUser"];
+        
        
         this.$store.dispatch("Ventas/addPro", {user: user, Producto: Producto, Precio: Precio, Cantidad: Cantidad  });
        

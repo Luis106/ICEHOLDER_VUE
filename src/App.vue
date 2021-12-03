@@ -19,6 +19,9 @@
        
         <!-- Footer-->
         <footer class="py-5 bg-dark">
+        
+            <input  type="submit" v-on:click="Ir"  class="fadeIn fourth" value= "MENU">
+
             <div class="container"><p class="m-0 text-center text-white">Copyright &copy; Your Website 2021</p></div>
         </footer>
 
@@ -34,19 +37,16 @@ export default {
   },
   data() {
     return {
-      currentView: "LOGIN"
+      currentView: "LOGIN",
+      menu: false
     }
   },
   methods: {
-    changeCurrentView(){
-      if (this.currentView === "LOGIN") {
-        this.currentView = "HOME";
-        this.$router.push({path: "/HOME"});
-      } else if(this.currentView === "HOME"){
-        this.currentView = "LOGIN";
-        this.$router.push({path: "/"})
+     Ir(){
+       
+          this.$router.push({path: "/MENU"});
+
       }
-    }
 
   },
   created() {

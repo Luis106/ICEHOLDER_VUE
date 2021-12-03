@@ -14,7 +14,7 @@
         </div>
         <!-- Product actions-->
           <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
-            <input type="number" value="1" min="0"  step="1" id = "Cantidad" />
+           {{Cantidad}}
             <button type="button"  class="text-center btn btn-outline-dark mt-auto" v-on:click="emitAgregar(index)" >Quitar</button>
         </div>
       </div>
