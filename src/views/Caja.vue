@@ -119,6 +119,10 @@ name: "Productos",
     this.getAllPro()
     this.restCaja()
   },
+  mounted(){
+    console.log("mouted")
+    this.$store.dispatch("Ventas/clear");
+  },
   components: {
     proCajaComponent,
     AnadidoCajaComponent

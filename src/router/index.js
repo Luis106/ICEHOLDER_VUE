@@ -58,6 +58,20 @@ const routes = [
 
     component: () => import('../views/Corte.vue')
   }
+  ,
+  {
+    path: '/Provedores',
+    name: 'Provedores',
+
+    component: () => import('../views/Provedores.vue')
+  }
+  ,
+  {
+    path: '/ProvedoresPapelera',
+    name: 'ProvedoresPapelera',
+
+    component: () => import('../views/ProvedoresPa.vue')
+  }
 ]
 
 const router = new VueRouter({

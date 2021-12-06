@@ -8,6 +8,7 @@ import Productos from '@/store/modules/Productos.store';
 
 import User from '@/store/modules/User.store';
 import Ventas from '@/store/modules/Ventas.store';
+import Provedores from '@/store/modules/Provedores.store';
 
 export default new Vuex.Store({
 	state: {},
@@ -15,6 +16,7 @@ export default new Vuex.Store({
 	modules: {
 		Productos: Productos,
 		User: User,
-		Ventas: Ventas
+		Ventas: Ventas,
+		Provedores: Provedores
 	}
 })

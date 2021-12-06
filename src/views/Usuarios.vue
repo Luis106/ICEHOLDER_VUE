@@ -77,6 +77,36 @@
                         </div>
                     </div>
 
+                    <div class="col mb-5">
+                        <div class="card h-100">
+                
+                            <div class="card-body p-4">
+                                <div class="text-center">
+                                    <!-- Product name-->
+                                    <h5 class="fw-bolder">Buscar:</h5>
+                                    <!-- Product reviews-->                            
+                                    <div class="d-flex justify-content-center small text-warning mb-2">
+                                    <select name="select" id = "SelCaja">
+                                      <option value="Usuario" selected>Nombre</option>
+                                      <option value="Admin"> Administrador</option>
+                                      <option value="_id">Id</option>
+                                    </select>
+                                    </div>
+                                    <div class="d-flex justify-content-center small text-warning mb-2">
+                                    <input type="text"  id="bpar" class="" name="bpar" placeholder="Valor">
+                                    </div>
+
+
+                                </div>
+                            </div>
+                            <!-- Product actions-->
+                            <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
+                                <button type="button"  class="text-center btn btn-outline-dark mt-auto" v-on:click="buscar()" >Buscar</button>
+                                  <button type="button"  class="text-center btn btn-outline-dark mt-auto" v-on:click="refresh()" >Refrescar</button>
+                            </div>
+                        </div>
+                    </div>
+
                    
                      
                       <div
@@ -187,25 +217,31 @@ name: "User",
 
         
       },
-      async actualizar(){
-        console.log("Actualizar")
-        if(this.actualId !== ""){
+
+      async buscar(){
+         console.log("Buscar")
+        const valor = document.getElementById("SelCaja").value;
+        const parametros = document.getElementById("bpar").value;
+
+        if(parametros){
+          console.log(valor)
+          console.log(parametros)
           
-          const Nombre = document.getElementById("CajaNom").value;
-          const Admin = document.getElementById("inputAd").checked;
-      
-          console.log(Nombre, Admin)
-          await this.$store.dispatch("User/editUser", {Id: this.actualId,  Index: this.actualIndex, Nombre: Nombre, Admin: Admin })
-          this.actualId = ""
-          this.actualIndex = ""
+          await this.$store.dispatch("User/getFindPro", {parametros : parametros, Datos: valor} )
 
         }else{
-          window.alert("No se ha indicado un usuario a modificar");
-
-
+           window.alert("No se posible buscar en blanco");
         }
+       
+    
       },
-      async crear(){
+
+      async refresh(){
+
+      await this.$store.dispatch("User/getAllUsers");
+
+      },
+       async crear(){
         const Nombre = document.getElementById("CajaNomC").value;
         const Contraseña = document.getElementById("CajaCon1").value;
         const Contraseña2 = document.getElementById("CajaCon2").value;
@@ -233,6 +269,26 @@ name: "User",
        
     
       },
+
+      async actualizar(){
+        console.log("Actualizar")
+        if(this.actualId !== ""){
+          
+          const Nombre = document.getElementById("CajaNom").value;
+          const Admin = document.getElementById("inputAd").checked;
+      
+          console.log(Nombre, Admin)
+          await this.$store.dispatch("User/editUser", {Id: this.actualId,  Index: this.actualIndex, Nombre: Nombre, Admin: Admin })
+          this.actualId = ""
+          this.actualIndex = ""
+
+        }else{
+          window.alert("No se ha indicado un usuario a modificar");
+
+
+        }
+      },
+     
       Ir(){
           this.$router.push({path: "/PersonalPapelera"});
       }

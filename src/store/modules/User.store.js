@@ -193,6 +193,26 @@ import axios from "axios";
 				}
 			}
 		},
+		async getFindPro({commit}, Pro) {
+			console.log(Pro)
+			try {
+				
+				const response = await axios.post(
+					`http://localhost:3000/Usuario/buscar`,
+					{Datos: Pro.parametros, Parametro: Pro.Datos}
+				);
+			
+				console.log(response.data)
+				
+				if (response.data){
+					
+					commit('SET_USERS', response.data);
+					
+				}
+			}catch (err) {
+				console.log(err);
+			}
+		}
 	};
 
 	const mutations = {

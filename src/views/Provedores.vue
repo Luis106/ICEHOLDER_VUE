@@ -16,13 +16,16 @@
                                     <h5 class="fw-bolder">Crear</h5>
                                     <!-- Product reviews-->
                                     <div class="d-flex justify-content-center small text-warning mb-2">
-                                    <input type="text"  id="CajaProNam" class="" name="CajaProNam" placeholder="Producto">
+                                    <input type="text"  id="CajaProNam" class="" name="CajaProNam" placeholder="Npmbre">
                                     </div>
                                     <div class="d-flex justify-content-center small text-warning mb-2">
-                                    <input type="text"  id="CajaProPre" class="" name="CajaProPre" placeholder="Precio">
+                                    <input type="text"  id="CajaProPre" class="" name="CajaProPre" placeholder="Dirección">
                                     </div>
                                     <div class="d-flex justify-content-center small text-warning mb-2">
-                                    <input type="text"  id="CajaProCan" class="" name="CajaProCan" placeholder="Cantidad">
+                                    <input type="text"  id="CajaProCan" class="" name="CajaProCan" placeholder="Correo">
+                                    </div>
+                                     <div class="d-flex justify-content-center small text-warning mb-2">
+                                    <input type="text"  id="CajaProTel" class="" name="CajaProTel" placeholder="Teléfono">
                                     </div>
 
 
@@ -46,13 +49,16 @@
                                     <h5 class="fw-bolder">Editar</h5>
                                     <!-- Product reviews-->
                                    <div class="d-flex justify-content-center small text-warning mb-2">
-                                    <input type="text"  id="CajaNam" class="" name="CajaNam" placeholder="Producto">
+                                    <input type="text"  id="CajaNam" class="" name="CajaNam" placeholder="Nombre">
                                     </div>
                                     <div class="d-flex justify-content-center small text-warning mb-2">
-                                    <input type="text"  id="CajaPre" class="" name="CajaPre" placeholder="Precio">
+                                    <input type="text"  id="CajaPre" class="" name="CajaPre" placeholder="Dirección">
                                     </div>
                                     <div class="d-flex justify-content-center small text-warning mb-2">
-                                    <input type="text"  id="CajaCan" class="" name="CajaCan" placeholder="Cantidad">
+                                    <input type="text"  id="CajaCan" class="" name="CajaCan" placeholder="Correo">
+                                    </div>
+                                    <div class="d-flex justify-content-center small text-warning mb-2">
+                                    <input type="text"  id="CajaTel" class="" name="CajaTel" placeholder="Teléfono">
                                     </div>
                                     
                                 </div>
@@ -74,9 +80,10 @@
                                     <div class="d-flex justify-content-center small text-warning mb-2">
                                     <select name="select" id = "SelCaja">
                                       <option value="Nombre" selected>Nombre</option>
-                                      <option value="Precio"> Precio</option>
+                                      <option value="Direccion"> Direccion</option>
                                       <option value="_id">Id</option>
-                                      <option value="Cantidad">Cantidad</option>
+                                      <option value="Correo">Correo</option>
+                                      <option value="Telefono">Telefono</option>                                   
                                     </select>
                                     </div>
                                     <div class="d-flex justify-content-center small text-warning mb-2">
@@ -100,17 +107,30 @@
                         v-for="(Producto, index) in getListaProductos"
                         :key="Producto._id"
                         >
-                        <proComponent
-                        :Nombre ="Producto.Nombre"
-                        :Cantidad ="Producto.Cantidad"
-                        :Precio ="Producto.Precio"
-                        :index="index"
-                        :id="Producto._id.toString()"
-
-                        @Delete="deleteTask"
-                        @Change="changeStatus"
-                        ></proComponent>
+                         <div class="col mb-5">
+                            <div class="card h-100">
+                                <!-- Sale badge-->
+                                <!-- Product details-->
+                                <div class="card-body p-4">
+                                    <div class="text-center">
+                                        <!-- Product name-->
+                                        <h5 class="fw-bolder">{{Producto.Nombre}}</h5>
+                                         <h5 class="fw-bolder">{{Producto.Direccion}}</h5>
+                                          <h5 class="fw-bolder">{{Producto.Correo}}</h5>
+                                           <h5 class="fw-bolder">{{Producto.Telefono}}</h5>
+                                    </div>
+                                </div>
+                                <!-- Product actions-->
+                                  <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
+                                    <button type="button" class="text-center btn btn-outline-dark mt-auto" v-on:click="ChangeStatus(Producto.Nombre, Producto.Direccion, Producto.Telefono,Producto.Correo, Producto._id, index)" >Modificar</button>
+                                    <button type="button"  class="text-center btn btn-outline-dark mt-auto" v-on:click="deleteTask(Producto._id,index)" >Eliminar</button>
+                                </div>
+                              </div>
+                            </div>
+             
                       </div>
+
+
                     
 
 
@@ -133,9 +153,6 @@ import {mapGetters} from "vuex";
 
 // Components
 //import createTaskInput from '../components/createTaskInput';
-import proComponent from '../components/proComponent.vue';
-
-
 
 export default {
 name: "Productos",
@@ -147,7 +164,7 @@ name: "Productos",
     }
   }, 
   computed:{
-      ...mapGetters('Productos',
+      ...mapGetters('Provedores',
         [
             "getListaProductos",
         ]
@@ -156,12 +173,12 @@ name: "Productos",
   methods: {
      async getAllPro(){
        
-        const ProList = this.$store.getters["Productos/getListaProductos"];
+        const ProList = this.$store.getters["Provedores/getListaProductos"];
 
 
         if (ProList && ProList.length === 0 ) {
           console.log("getAllPro")
-          await this.$store.dispatch("Productos/getAllPro");
+          await this.$store.dispatch("Provedores/getAllPro");
         }
         console.log(ProList)
        
@@ -170,20 +187,21 @@ name: "Productos",
        async refresh(){
        
     
-      await this.$store.dispatch("Productos/getAllPro");
+      await this.$store.dispatch("Provedores/getAllPro");
       },
 
       async deleteTask(id, index){
         console.log(index)
         this.actualId = id
         this.actualIndex = index
-        await this.$store.dispatch("Productos/deletePro", {Id: this.actualId,  Index: this.actualIndex} );
+        await this.$store.dispatch("Provedores/deletePro", {Id: this.actualId,  Index: this.actualIndex} );
        
       },
-       changeStatus(Nombre, Precio, Cantidad, id, index){
+       ChangeStatus(Nombre, Direccion, Correo,Telefono, id, index){
         document.getElementById("CajaNam").value = Nombre;
-        document.getElementById("CajaPre").value = Precio;
-        document.getElementById("CajaCan").value = Cantidad;
+        document.getElementById("CajaPre").value = Direccion;
+        document.getElementById("CajaCan").value = Correo;
+        document.getElementById("CajaTel").value = Telefono;
         console.log(id)
         this.actualId = id
         this.actualIndex = index
@@ -200,8 +218,9 @@ name: "Productos",
           const Nombre = document.getElementById("CajaNam").value;
           const Precio = document.getElementById("CajaPre").value;
           const Cantidad = document.getElementById("CajaCan").value;
+          const Telefono = document.getElementById("CajaTel").value;
 
-          await this.$store.dispatch("Productos/ChangePro", {Id: this.actualId,  Index: this.actualIndex, Nombre: Nombre, Precio: Precio, Cantidad: Cantidad})
+          await this.$store.dispatch("Provedores/ChangePro", {Id: this.actualId,  Index: this.actualIndex, Nombre: Nombre, Direccion: Precio, Correo: Cantidad, Telefono: Telefono})
           this.actualId = ""
           this.actualIndex = ""
 
@@ -215,19 +234,22 @@ name: "Productos",
     
       },
       async crear(){
-        const Precio = document.getElementById("CajaProPre").value;
-        const Cantidad = document.getElementById("CajaProCan").value;
         const Nombre = document.getElementById("CajaProNam").value;
-
+        const Direccion = document.getElementById("CajaProPre").value;
+        const Correo = document.getElementById("CajaProCan").value;
+        const Telefono = document.getElementById("CajaProTel").value;
+       
        const Pro = {
           Nombre: Nombre,
-          Precio: Precio,
-          Cantidad: Cantidad
+          Direccion: Direccion,
+          Correo: Correo,
+          Telefono: Telefono
         }
+        console.log(Pro)
 
         if(Pro){
           
-          await this.$store.dispatch("Productos/addPro", Pro )
+          await this.$store.dispatch("Provedores/addPro", Pro )
 
         }else{
            window.alert("No se posible crear Productos en blanco");
@@ -244,7 +266,7 @@ name: "Productos",
           console.log(valor)
           console.log(parametros)
           
-          await this.$store.dispatch("Productos/getFindPro", {parametros : parametros, Datos: valor} )
+          await this.$store.dispatch("Provedores/getFindPro", {parametros : parametros, Datos: valor} )
 
         }else{
            window.alert("No se posible buscar en blanco");
@@ -253,14 +275,14 @@ name: "Productos",
     
       },
       Ir(){
-          this.$router.push({path: "/ProductosPapelera"});
+          this.$router.push({path: "/ProvedoresPapelera"});
       }
   },
   created() {
     this.getAllPro()
   },
   components: {
-    proComponent
+    
   }
 }
 

@@ -19,7 +19,7 @@
                             </div>
                             <!-- Product actions-->
                             <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
-                                      <input type="submit" v-on:click="IrPro"  class="fadeIn fourth" value= "Eliminados">
+                                      <input type="submit" v-on:click="IrPro"  class="fadeIn fourth" value= "Productos">
                             </div>
                         </div>
                     </div>
@@ -38,7 +38,7 @@
                             </div>
                             <!-- Product actions-->
                             <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
-                                      <input type="submit" v-on:click="IrCaj"  class="fadeIn fourth" value= "Eliminados">
+                                      <input type="submit" v-on:click="IrCaj"  class="fadeIn fourth" value= "Caja">
                             </div>
                         </div>
                     </div>
@@ -66,13 +66,30 @@
                             <div class="card-body p-4">
                                <div class="text-center">
                                     <!-- Product name-->
-                                    <h5 class="fw-bolder">Personal</h5>
+                                    <h5 class="fw-bolder">Cortes</h5>
                                   
                                 </div>
                             </div>
                             <!-- Product actions-->
                             <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
                                       <input type="submit" v-on:click="IrCor"  class="fadeIn fourth" value= "Corte">
+                            </div>
+                        </div>
+                    </div>
+
+                     <div class="col mb-5">
+                        <div class="card h-100">
+                
+                            <div class="card-body p-4">
+                               <div class="text-center">
+                                    <!-- Product name-->
+                                    <h5 class="fw-bolder">Provedores</h5>
+                                  
+                                </div>
+                            </div>
+                            <!-- Product actions-->
+                            <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
+                                      <input type="submit" v-on:click="IrProv"  class="fadeIn fourth" value= "Provedores">
                             </div>
                         </div>
                     </div>
@@ -130,6 +147,10 @@ name: "Productos",
       },
       IrCor(){
           this.$router.push({path: "/CORTE"});
+      }
+      ,
+      IrProv(){
+          this.$router.push({path: "/Provedores"});
       }
   },
   created() {

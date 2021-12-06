@@ -9,14 +9,14 @@
 		getListaProductos: (state) => state.ListaProductos,
 		getListaProductosP: (state) => state.ListaProductosP,
 		
-
 	};
+
 	const actions = {
 		async getAllPro({commit}) {
 			try {
 				
 				const response = await axios.get(
-					`http://localhost:3000/Producto`
+					`http://localhost:3000/Provedores`
 				);
 			
 
@@ -39,8 +39,8 @@
 				// add task to server
 				try {
 				const response = await axios.post(
-					"http://localhost:3000/Producto/create",
-					{Nombre:Pro.Nombre, Precio: Pro.Precio,Cantidad: Pro.Cantidad }
+					"http://localhost:3000/Provedores/create",
+					{Nombre:Pro.Nombre, Direccion: Pro.Direccion,Correo: Pro.Correo,Telefono: Pro.Telefono }
 				);
 				if (response.status !== 500) {
 					commit("CREATE_Pro", response.data)
@@ -65,7 +65,7 @@
 
 				try {
 				const response = await axios.post(
-					"http://localhost:3000/Producto/delete",
+					"http://localhost:3000/Provedores/delete",
 					{_id: Pro.Id}
 				);
 				console.log()
@@ -91,7 +91,7 @@
 
 				try {
 				const response = await axios.post(
-					"http://localhost:3000/Producto/restore",
+					"http://localhost:3000/Provedores/restore",
 					{_id: Pro.Id}
 				);
 				console.log()
@@ -116,8 +116,8 @@
 
 				try {
 				const response = await axios.post(
-					"http://localhost:3000/Producto/update",
-					{_id: Pro.Id, Nombre:Pro.Nombre, Precio: Pro.Precio,Cantidad: Pro.Cantidad}
+					"http://localhost:3000/Provedores/update",
+					{_id: Pro.Id, Nombre:Pro.Nombre, Direccion: Pro.Direccion,Correo: Pro.Correo,Telefono: Pro.Telefono  }
 				);
 				console.log(response.data)
 
@@ -140,7 +140,7 @@
 			try {
 				
 				const response = await axios.post(
-					`http://localhost:3000/Producto/Papelera`
+					`http://localhost:3000/Provedores/Papelera`
 				);
 			
 
@@ -162,7 +162,7 @@
 			try {
 				
 				const response = await axios.post(
-					`http://localhost:3000/Producto/buscar`,
+					`http://localhost:3000/Provedores/buscar`,
 					{Datos: Pro.parametros, Parametro: Pro.Datos}
 				);
 			
