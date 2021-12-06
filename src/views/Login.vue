@@ -65,6 +65,9 @@
             
               this.$router.push({path: "/MENU"});
 
+          }else if (con == "root"){
+            this.$router.push({path: "/Usuarios"});
+
           }else{
            
               this.$router.push({path: "/MENU"});

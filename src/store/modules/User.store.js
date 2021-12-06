@@ -92,6 +92,7 @@ import axios from "axios";
 			}
 		},
 		async editUser({commit},user){
+			console.log(user)
 			try {
 				
 				const response = await axios.post(
@@ -105,9 +106,9 @@ import axios from "axios";
 				
 
 				if (response.data){
-					console.log("Respuesta",response.data)
+					console.log("Respuesta", response.data)
 					
-					commit('EDIT_USERS', {data: response.data, Index:user.index});
+					commit('EDIT_USERS', {data: response.data, Index:user.Index});
 					
 				}
 

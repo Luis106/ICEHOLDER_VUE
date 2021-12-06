@@ -272,6 +272,7 @@ name: "User",
 
       async actualizar(){
         console.log("Actualizar")
+        console.log("Index ", this.actualIndex)
         if(this.actualId !== ""){
           
           const Nombre = document.getElementById("CajaNom").value;
@@ -279,8 +280,7 @@ name: "User",
       
           console.log(Nombre, Admin)
           await this.$store.dispatch("User/editUser", {Id: this.actualId,  Index: this.actualIndex, Nombre: Nombre, Admin: Admin })
-          this.actualId = ""
-          this.actualIndex = ""
+         
 
         }else{
           window.alert("No se ha indicado un usuario a modificar");
