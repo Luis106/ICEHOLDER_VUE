@@ -13,10 +13,10 @@ const date = new Date();
 		
 	};
 	const actions = {
-		getAllPro({commit}) {
+		getAllPro({commit}, Pro) {
 				if (commit){
 					
-					commit('SET_Pro', commit);
+					commit('SET_Pro', Pro);
 					
 				}
 
@@ -44,6 +44,7 @@ const date = new Date();
 					console.log("No se pudo concretar la venta",error)
 				}
 		},
+
 
 		async addPro({commit}){
 			const Fecha = (date.getDate()+"/"+(date.getMonth()+1)+"/"+date.getFullYear())
@@ -88,6 +89,7 @@ const date = new Date();
 				let cantidades= []
 				let personal = ""
 				let montos= []
+
 				console.log(List)
 				List.forEach(function(entry) {
 
@@ -104,25 +106,32 @@ const date = new Date();
 
 
 				});
-
 				console.log("Fin del ciclo")
-				try {
-					const response = await axios.post(
-						"http://localhost:3000/ventas/create",
-						{Personal: personal, Cantidades: cantidades, Productos: productos, Montos: montos}
-						);
+				if(personal){
 
-						console.log(response.data)
-
-						if(response.status === 200){
-							router.push({path: "/CAJA"});
-						}
-
-					
-				} catch (error) {
-
-					console.log("No se pudo concretar la venta",error.response)
+					try {
+						const response = await axios.post(
+							"http://localhost:3000/ventas/create",
+							{Personal: personal, Cantidades: cantidades, Productos: productos, Montos: montos}
+							);
+	
+							console.log(response.data)
+	
+							if(response.status === 200){
+								router.push({path: "/CAJA"});
+							}
+	
+						
+					} catch (error) {
+	
+						console.log("No se pudo concretar la venta",error.response)
+					}
+				}else{
+					window.alert("No se inicio secion con un usuario valido")
 				}
+
+			
+			
 				
 
 				

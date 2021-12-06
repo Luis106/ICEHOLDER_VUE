@@ -106,7 +106,9 @@ import axios from "axios";
 				
 
 				if (response.data){
-					console.log("Respuesta", response.data)
+					console.log("Respuesta")
+					console.log(response.data)
+					console.log("Respuesta")
 					
 					commit('EDIT_USERS', {data: response.data, Index:user.Index});
 					

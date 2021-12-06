@@ -28,7 +28,7 @@
                         :key="index"
                         >
                         <AnadidoCajaComponent
-                        :Nombre ="Producto.Nombre"
+                        :Nombre ="Producto.Producto"
                         :Cantidad ="Producto.Cantidad"
                         :Precio ="Producto.Precio"
                         :index="index"
@@ -86,15 +86,15 @@ name: "Productos",
         }
         console.log(ProList)
        
-
+     
       },
         Agregar(Producto, Precio, Cantidad){
            //const user = "Luna"
         const user = this.$store.getters["User/getUser"];
-        console.log(Producto,Precio,Cantidad , user)
+        console.log("Parametros de agregar",Producto, Precio, Cantidad)
         
        
-        this.$store.dispatch("Ventas/addPro", {user: user, Producto: Producto, Precio: Precio, Cantidad: Cantidad  });
+        this.$store.dispatch("Ventas/getAllPro", {user: user, Producto: Producto, Precio: Precio, Cantidad: Cantidad  });
        
       },
         Quitar(index){

@@ -52,7 +52,8 @@
                                     <h5 class="fw-bolder">Cantidades:{{data.Cantidades}}</h5>  
                                     <h5 class="fw-bolder">Montos: {{data.Montos}}</h5>      
                                     <h5 class="fw-bolder">Fecha {{data.Fecha}}</h5>   
-                                    <h5 class="fw-bolder">Hora: {{data.Hora}}</h5>                               
+                                    <h5 class="fw-bolder">Hora: {{data.Hora}}</h5>           
+                                    <h5 class="fw-bolder">Personal: {{data.Personal}}</h5>                      
                                                                 
                                 </div>
                             </div>
